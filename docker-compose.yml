@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+  nestjs-mongodb:
+    build: ./mongodb_rs
+    container_name: nestjs-mongodb
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: fzrsahi
+        MONGO_INITDB_ROOT_PASSWORD: 123
+        MONGO_INITDB_ROOT_DATABASE: nestmongo
+        MONGO_REPLICA_HOST: localhost
+        MONGO_REPLICA_PORT: 27017
+    ports:
+      - 27017:27017
+ 
