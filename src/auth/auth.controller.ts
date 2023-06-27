@@ -1,6 +1,14 @@
-import { Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Req,
+  UnauthorizedException,
+  UseGuards,
+} from '@nestjs/common';
 import { GoogleAuthGuard } from './guard';
 import { AuthService } from './auth.service';
+import { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -18,7 +26,13 @@ export class AuthController {
   }
 
   @Get('test')
-  test() {
+  test(@Req() req: Request) {
+    if (!req.user) throw new UnauthorizedException();
     return this.authService.test();
+  }
+
+  @Get('met')
+  me() {
+    return 'je';
   }
 }
